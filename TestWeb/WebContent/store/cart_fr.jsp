@@ -8,8 +8,8 @@
 <option value="fr">French</option>
 </select>
 </form>
-<h3>Shopping Cart FR</h3>
-<p>This is the shopping cart page in French.</p>
+<h3>Chariot</h3>
+<p>Il s'agit de la page du panier.</p>
 </body>
 
 </html>
