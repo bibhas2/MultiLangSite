@@ -1,0 +1,34 @@
+In a large multi-linguage static site, doing I18N using JSTL's <fmt> tag is not a feasible option. In that
+case, static files need to contain actual text.
+  
+This sample application shows how to create language specific files, such as "cart_en.jsp" and "cart_fr.jsp"
+and access the page using "cart.html". System will automatically route the request to the most suitable JSP file.
+For more details, see "Detail Algorithm" section below.
+
+Running the Application
+=======================
+Deploy the project to a server.
+
+In your browser, set the language to be English or French. Access the site as:
+
+http://localhost:8080/TestWeb/store/cart.html
+
+The page should reflect language of the browser. Try switching the language from the page. Now, your
+setting at the application level will override browser's settings.
+
+What happens if the browser's language is not supported? Restart the browser. Set its language to Danish.
+Access the site again. This time, the site will fall back to English.
+
+Detail Algorithm
+================
+The application maintains a list of supported languages. See the "supported-languages" context parameter in web.xml.
+
+When user first comes to the site, system tries to use the browser's locale. If it is not supported, we fall back to the first supported language.
+
+Once a language is selected, it is set as the locale of JSTL. That means, all <fmt:*> tags in JSPs will use that locale.
+
+System then converts the requested resource to a language specific JSP file. For example, "/store/cart.html" gets converted to
+"/store/cart_en.jsp" or "/store/cart_fr.jsp". System then loads this JSP file.
+
+User can switch language by supplying the "language" URL parameter. Such as "?language=fr". If this language is supported, then
+we update JSTL's locale and continue to use this language for all subsequent requests.
